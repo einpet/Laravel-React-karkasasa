@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource as parentAlias;
 
-class EntityResource extends parentAlias
+class CommentResource extends parentAlias
 {
     /**
      * Transform the resource into an array.

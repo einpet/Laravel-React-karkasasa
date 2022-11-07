@@ -27,7 +27,7 @@ class CommentRequest extends FormRequest
         return [
             'name' => ['required', 'string','max:255'],
             'date' => ['required', 'string','max:255'],
-            'fk_recipeid' => ['required', 'string','max:255'],
+            'fk_recipeid' => ['required', 'number','max:255'],
             'condition' => ['required', 'integer','max:10'],
             'deletable' => ['required', 'boolean'],
         ];

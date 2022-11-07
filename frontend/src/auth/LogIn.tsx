@@ -156,21 +156,21 @@ function LogIn() {
 			type="button"
 			className="btn btn-primary btn-sm"
 			onClick={() => update(() => state.isDialogVisible = true)}
-			>Log in</button>
+			>Prisijungti</button>
 		<Dialog
 			visible={state.isDialogVisible}
 			onHide={() => update(() => state.isDialogVisible = false)}
-			header={<span className="me-2">Enter your crendentials, please.</span>}
+			header={<span className="me-2">Įveaskite savo prisijungimus.</span>}
 			style={{width: "50ch"}}
 			>
 			{state.isLoginErr &&
-				<div className="alert alert-warning">Log in has failed. Incorrect username, password or both.</div>
+				<div className="alert alert-warning">Prisijungimas klaidingas. Blogas slapyvardis, slaptažodis arba abu.</div>
 			}
 			<div className="mb-3">
 				<label
 					htmlFor="username"
 					className="form-label"
-					>Username:</label>
+					>Slapyvardis:</label>
 				<InputText
 					id="username"
 					className={"form-control " + (state.isUsernameErr ? "is-invalid" : "") }
@@ -180,14 +180,14 @@ function LogIn() {
 					onChange={(e) => update(() => state.username = e.target.value)}
 					/>
 				{state.isUsernameErr &&
-					<div className="invalid-feedback">Username must be non empty and non whitespace.</div>
+					<div className="invalid-feedback">Slapyvardis negali būti tuščias, prašome užpildykite.</div>
 				}
 			</div>
 			<div className="mb-3">
 				<label
 					htmlFor="password"
 					className="form-label"
-					>Password</label>
+					>Slaptažodis</label>
 				<Password
 					id="password"
 					className={"form-control " + (state.isPasswordErr ? "is-invalid" : "") }
@@ -198,7 +198,7 @@ function LogIn() {
 					onChange={(e) => update(() => state.password = e.target.value)}
 					/>
 				{state.isPasswordErr &&
-					<div className="invalid-feedback">Password must be non empty.</div>
+					<div className="invalid-feedback">Slaptažodis negali būti tuščias.</div>
 				}
 			</div>
 			<div className="d-flex justify-content-end">
@@ -206,12 +206,12 @@ function LogIn() {
 					type="button"
 					className="btn btn-primary me-2"
 					onClick={() => onLogIn()}
-					>Log in</button>
+					>Prisijungti</button>
 				<button
 					type="button"
 					className="btn btn-primary"
 					onClick={() => update(() => state.isDialogVisible = false)}
-					>Cancel</button>
+					>Atšaukti</button>
 			</div>
 		</Dialog>
 		</>;

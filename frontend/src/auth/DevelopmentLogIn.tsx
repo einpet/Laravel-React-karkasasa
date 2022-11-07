@@ -95,24 +95,24 @@ function DevelopmentLogIn() {
 	//render component html
 	let html = 
 		<>
-		<button 
+{/* 		<button 
 			type="button"
 			className="btn btn-danger btn-sm ms-2" 
 			onClick={() => onLogIn()}
-			>Fast log in as 'a'</button>
+			>Fast log in as 'a'</button> */}
 		<Dialog 
 			visible={state.isDialogVisible} 
 			onHide={() => update(state => state.isDialogVisible = false)}
-			header={<span className="me-2">Something went wrong...</span>}
+			header={<span className="me-2">Kažkas blogai...</span>}
 			style={{width: "50ch"}}
 			>
-				<div className="alert alert-warning">Log in has failed. Incorrect username, password or backend failure.</div>
+				<div className="alert alert-warning">Prisijungimas klaidingas. Blogas slapyvardis, slaptažodis arba kodo klaida.</div>
 				<div className="d-flex justify-content-end">
 					<button
 						type="button"
 						className="btn btn-primary" 
 						onClick={() => update(state => state.isDialogVisible = false)}
-						>Close</button>
+						>Uždaryti</button>
 				</div>
 			</Dialog>
 		</>;

@@ -31,7 +31,7 @@ class CommentController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'comments' => $comments,
+            'Comments' => $comments,
         ]);
     }
 
@@ -39,10 +39,10 @@ class CommentController extends Controller
     {
         $id = $request->query('id');
         try{
-            $Comment = Comment::findOrFail($id);
-            return response()->json($Comment);
+            $comment = Comment::findOrFail($id);
+            return response()->json($comment);
         } catch(ModelNotFoundException $e){
-            return abort(500, 'Comment not found');
+            return abort(500, 'Komentaras nebuvo rastas');
         }
 
     }
@@ -51,8 +51,8 @@ class CommentController extends Controller
     {
         $id = $request->id;
         try {
-            $Comment = Comment::findOrFail($id);
-            $Comment->update($request->validated());
+            $comment = Comment::findOrFail($id);
+            $comment->update($request->validated());
             return response()->json([
                 'status' => 'success'
             ]);

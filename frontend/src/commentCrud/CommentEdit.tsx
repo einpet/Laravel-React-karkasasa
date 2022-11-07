@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Calendar } from 'primereact/calendar';
 import { InputText } from 'primereact/inputtext';
+import { InputNumber } from 'primereact/inputnumber';
 import { Rating } from 'primereact/rating';
 import { Checkbox } from 'primereact/checkbox';
   
@@ -25,6 +26,7 @@ class State
 	id : number = -1;
 	date: Date  = new Date(Date.now());
 	name: string = "";
+	fk_recipeid: number = 0;
 	condition : number = 0;
 	deletable : boolean = true;
 
@@ -101,6 +103,7 @@ function CommentEdit() {
 				state.id = data.id;
 				state.date = new Date(data.date);
 				state.name = data.name;
+				state.fk_recipeid = data.fk_recipeid;
 				state.condition = data.condition;
 				state.deletable = data.deletable;
 			})
@@ -138,6 +141,7 @@ function CommentEdit() {
 			comment.id = state.id;
 			comment.name = state.name;
 			comment.date = localDate.toISOString();
+			comment.fk_recipeid = state.fk_recipeid;
 			comment.condition = state.condition;
 			comment.deletable = state.deletable;
 
@@ -204,6 +208,17 @@ function CommentEdit() {
 							className={"form-control " + (state.isNameErr ? "is-invalid" : "")}
 							value={state.name}
 							onChange={(e) => update(() => state.name = e.target.value)}
+							/>
+						{state.isNameErr && 
+							<div className="invalid-feedback">Name must be non empty and non whitespace.</div>
+						}
+
+						<label htmlFor="fk_recipeid" className="form-label">Receptas:</label>
+						<InputNumber 
+							id="fk_recipeid" 
+							className={"form-control " + (state.isNameErr ? "is-invalid" : "")}
+							value={state.fk_recipeid}
+							onChange={(e) => update(() => state.fk_recipeid = e.value!)}
 							/>
 						{state.isNameErr && 
 							<div className="invalid-feedback">Name must be non empty and non whitespace.</div>

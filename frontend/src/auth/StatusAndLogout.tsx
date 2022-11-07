@@ -46,12 +46,12 @@ function StatusAndLogOut() {
 	let html = 
 		<>
 		<span className="d-flex align-items-center">
-			<span>Welcome, {appState.userTitle}</span>
+			<span>Sveiki, {appState.userTitle}</span>
 			<button 
 				type="button"
 				className="btn btn-primary btn-sm ms-2" 
 				onClick={() => onLogOut()}
-				>Log out</button>
+				>Atsijungti</button>
 		</span>
 		</>;
 

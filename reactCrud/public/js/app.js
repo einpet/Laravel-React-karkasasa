@@ -5289,8 +5289,8 @@ function About() {
         children: "Demo react application."
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
         children: ["Click on ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("q", {
-          children: "EntityCrud"
-        }), " for demo CRUD interface on an entity."]
+          children: "CommentCrud"
+        }), " for demo CRUD interface on an comment."]
       })]
     }))
   }); //
@@ -5327,7 +5327,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _navmenu_NavMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../navmenu/NavMenu */ "./resources/js/components/navmenu/NavMenu.tsx");
 /* harmony import */ var _footer_Footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../footer/Footer */ "./resources/js/components/footer/Footer.tsx");
 /* harmony import */ var _about_About__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../about/About */ "./resources/js/components/about/About.tsx");
-/* harmony import */ var _entityCrud_EntityCrud__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../entityCrud/EntityCrud */ "./resources/js/components/entityCrud/EntityCrud.tsx");
+/* harmony import */ var _commentCrud_CommentCrud__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../commentCrud/CommentCrud */ "./resources/js/components/commentCrud/CommentCrud.tsx");
 var __assign = undefined && undefined.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -5438,8 +5438,8 @@ function App() {
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Routes, {
         children: _appState__WEBPACK_IMPORTED_MODULE_3__["default"].isLoggedIn.value && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
           children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-            path: "/entityCrud/*",
-            element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_entityCrud_EntityCrud__WEBPACK_IMPORTED_MODULE_9__["default"], {})
+            path: "/commentCrud/*",
+            element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_commentCrud_CommentCrud__WEBPACK_IMPORTED_MODULE_9__["default"], {})
           }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
             path: "/",
             element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_about_About__WEBPACK_IMPORTED_MODULE_8__["default"], {})
@@ -6326,9 +6326,9 @@ function StatusAndLogOut() {
 
 /***/ }),
 
-/***/ "./resources/js/components/entityCrud/EntityCreate.tsx":
+/***/ "./resources/js/components/commentCrud/CommentCreate.tsx":
 /*!*************************************************************!*\
-  !*** ./resources/js/components/entityCrud/EntityCreate.tsx ***!
+  !*** ./resources/js/components/commentCrud/CommentCreate.tsx ***!
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -6348,7 +6348,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app/config */ "./resources/js/components/app/config.tsx");
 /* harmony import */ var _app_backend__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app/backend */ "./resources/js/components/app/backend.tsx");
 /* harmony import */ var _app_notify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app/notify */ "./resources/js/components/app/notify.tsx");
-/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./models */ "./resources/js/components/entityCrud/models.tsx");
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./models */ "./resources/js/components/commentCrud/models.tsx");
 var __assign = undefined && undefined.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -6418,7 +6418,7 @@ function () {
  */
 
 
-function EntityCreate() {
+function CommentCreate() {
   //get state container and state updater
   var _a = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new State()),
       state = _a[0],
@@ -6457,22 +6457,23 @@ function EntityCreate() {
 
       if (state.isNameErr) return; //drop timezone from date, otherwise we will see wrong dates when they come back from backend
 
-      var localDate = new Date(state.date.getTime() - state.date.getTimezoneOffset() * 60 * 1000); //collect entity data
+      var localDate = new Date(state.date.getTime() - state.date.getTimezoneOffset() * 60 * 1000); //collect comment data
 
-      var entity = new _models__WEBPACK_IMPORTED_MODULE_9__.EntityForCU();
-      entity.name = state.name;
-      entity.date = localDate.toISOString();
-      entity.condition = state.condition;
-      entity.deletable = state.deletable; //request entity creation
+      var comment = new _models__WEBPACK_IMPORTED_MODULE_9__.CommentForCU();
+      comment.name = state.name;
+      comment.date = localDate.toISOString();
+      comment.fk_recipeid = state.fk_recipeid;
+      comment.condition = state.condition;
+      comment.deletable = state.deletable; //request comment creation
 
-      _app_backend__WEBPACK_IMPORTED_MODULE_7__["default"].post(_app_config__WEBPACK_IMPORTED_MODULE_6__["default"].backendUrl + "/entity/create", entity) //success
+      _app_backend__WEBPACK_IMPORTED_MODULE_7__["default"].post(_app_config__WEBPACK_IMPORTED_MODULE_6__["default"].backendUrl + "/comment/create", comment) //success
       .then(function (resp) {
-        //redirect back to entity list on success
+        //redirect back to comment list on success
         navigate("./../", {
           state: "refresh"
         }); //show success message
 
-        (0,_app_notify__WEBPACK_IMPORTED_MODULE_8__.notifySuccess)("Entity created.");
+        (0,_app_notify__WEBPACK_IMPORTED_MODULE_8__.notifySuccess)("Comment created.");
       }) //failure
       ["catch"](function (err) {
         updateState(function (state) {
@@ -6490,7 +6491,7 @@ function EntityCreate() {
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", __assign({
         className: "mb-1"
       }, {
-        children: "Create new entity"
+        children: "Create new comment"
       })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", __assign({
         className: "d-flex justify-content-center"
       }, {
@@ -6608,13 +6609,13 @@ function EntityCreate() {
 } //
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EntityCreate);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CommentCreate);
 
 /***/ }),
 
-/***/ "./resources/js/components/entityCrud/EntityCrud.tsx":
+/***/ "./resources/js/components/commentCrud/CommentCrud.tsx":
 /*!***********************************************************!*\
-  !*** ./resources/js/components/entityCrud/EntityCrud.tsx ***!
+  !*** ./resources/js/components/commentCrud/CommentCrud.tsx ***!
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -6625,33 +6626,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _EntityCreate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EntityCreate */ "./resources/js/components/entityCrud/EntityCreate.tsx");
-/* harmony import */ var _EntityList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EntityList */ "./resources/js/components/entityCrud/EntityList.tsx");
-/* harmony import */ var _EntityEdit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EntityEdit */ "./resources/js/components/entityCrud/EntityEdit.tsx");
+/* harmony import */ var _CommentCreate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CommentCreate */ "./resources/js/components/commentCrud/CommentCreate.tsx");
+/* harmony import */ var _CommentList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CommentList */ "./resources/js/components/commentCrud/CommentList.tsx");
+/* harmony import */ var _CommentEdit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CommentEdit */ "./resources/js/components/commentCrud/CommentEdit.tsx");
 
 
 
 
 
 /**
- * CRUD operations on a single kind of entity. This component defines a router for
+ * CRUD operations on a single kind of comment. This component defines a router for
  * components of concrete operations. React component.
  * @returns Component HTML.
  */
 
-function EntityCrud() {
+function CommentCrud() {
   //render component html
   var html = (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Routes, {
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
         path: "/",
-        element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_EntityList__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+        element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CommentList__WEBPACK_IMPORTED_MODULE_2__["default"], {})
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
         path: "/create",
-        element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_EntityCreate__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+        element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CommentCreate__WEBPACK_IMPORTED_MODULE_1__["default"], {})
       }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Route, {
-        path: "/edit/:entityId",
-        element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_EntityEdit__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+        path: "/edit/:commentId",
+        element: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_CommentEdit__WEBPACK_IMPORTED_MODULE_3__["default"], {})
       })]
     })
   }); //
@@ -6661,13 +6662,13 @@ function EntityCrud() {
 } //
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EntityCrud);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CommentCrud);
 
 /***/ }),
 
-/***/ "./resources/js/components/entityCrud/EntityEdit.tsx":
+/***/ "./resources/js/components/commentCrud/CommentEdit.tsx":
 /*!***********************************************************!*\
-  !*** ./resources/js/components/entityCrud/EntityEdit.tsx ***!
+  !*** ./resources/js/components/commentCrud/CommentEdit.tsx ***!
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -6687,7 +6688,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../app/config */ "./resources/js/components/app/config.tsx");
 /* harmony import */ var _app_backend__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../app/backend */ "./resources/js/components/app/backend.tsx");
 /* harmony import */ var _app_notify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app/notify */ "./resources/js/components/app/notify.tsx");
-/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./models */ "./resources/js/components/entityCrud/models.tsx");
+/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./models */ "./resources/js/components/commentCrud/models.tsx");
 var __assign = undefined && undefined.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -6761,7 +6762,7 @@ function () {
  */
 
 
-function EntityEdit() {
+function CommentEdit() {
   //get state container and state updater
   var _a = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(new State()),
       state = _a[0],
@@ -6791,9 +6792,9 @@ function EntityEdit() {
 
   if (!state.isInitialized) {
     //query data
-    _app_backend__WEBPACK_IMPORTED_MODULE_7__["default"].get(_app_config__WEBPACK_IMPORTED_MODULE_6__["default"].backendUrl + "/entity/load", {
+    _app_backend__WEBPACK_IMPORTED_MODULE_7__["default"].get(_app_config__WEBPACK_IMPORTED_MODULE_6__["default"].backendUrl + "/comment/load", {
       params: {
-        id: locationParams["entityId"]
+        id: locationParams["commentId"]
       }
     }).then(function (resp) {
       updateState(function (state) {
@@ -6830,23 +6831,24 @@ function EntityEdit() {
 
       if (state.isNameErr) return; //drop timezone from date, otherwise we will see wrong dates when they come back from backend
 
-      var localDate = new Date(state.date.getTime() - state.date.getTimezoneOffset() * 60 * 1000); //collect entity data
+      var localDate = new Date(state.date.getTime() - state.date.getTimezoneOffset() * 60 * 1000); //collect comment data
 
-      var entity = new _models__WEBPACK_IMPORTED_MODULE_9__.EntityForCU();
-      entity.id = state.id;
-      entity.name = state.name;
-      entity.date = localDate.toISOString();
-      entity.condition = state.condition;
-      entity.deletable = state.deletable; //request entity creation
+      var comment = new _models__WEBPACK_IMPORTED_MODULE_9__.CommentForCU();
+      comment.id = state.id;
+      comment.name = state.name;
+      comment.fk_recipeid = state.fk_recipeid;
+      comment.date = localDate.toISOString();
+      comment.condition = state.condition;
+      comment.deletable = state.deletable; //request comment creation
 
-      _app_backend__WEBPACK_IMPORTED_MODULE_7__["default"].post(_app_config__WEBPACK_IMPORTED_MODULE_6__["default"].backendUrl + "/entity/update", entity) //success
+      _app_backend__WEBPACK_IMPORTED_MODULE_7__["default"].post(_app_config__WEBPACK_IMPORTED_MODULE_6__["default"].backendUrl + "/comment/update", comment) //success
       .then(function (resp) {
-        //redirect back to entity list on success
+        //redirect back to comment list on success
         navigate("./../../", {
           state: "refresh"
         }); //show success message
 
-        (0,_app_notify__WEBPACK_IMPORTED_MODULE_8__.notifySuccess)("Entity updated.");
+        (0,_app_notify__WEBPACK_IMPORTED_MODULE_8__.notifySuccess)("Comment updated.");
       }) //failure
       ["catch"](function (err) {
         updateState(function (state) {
@@ -6864,7 +6866,7 @@ function EntityEdit() {
       children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", __assign({
         className: "mb-1"
       }, {
-        children: "Editing entity"
+        children: "Editing comment"
       })), state.isLoading && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", __assign({
         className: "d-flex flex-column flex-grow-1 justify-content-center align-items-center"
       }, {
@@ -7009,13 +7011,13 @@ function EntityEdit() {
 } //
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EntityEdit);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CommentEdit);
 
 /***/ }),
 
-/***/ "./resources/js/components/entityCrud/EntityList.tsx":
+/***/ "./resources/js/components/commentCrud/CommentList.tsx":
 /*!***********************************************************!*\
-  !*** ./resources/js/components/entityCrud/EntityList.tsx ***!
+  !*** ./resources/js/components/commentCrud/CommentList.tsx ***!
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -7087,12 +7089,12 @@ function () {
   return State;
 }();
 /**
- * List the instances of the entity.
+ * List the instances of the comment.
  * @returns Component HTML.
  */
 
 
-function EntityList() {
+function CommentList() {
   var _a, _b, _c, _d; //get state container and state updater
 
 
@@ -7119,7 +7121,7 @@ function EntityList() {
 
   if (!state.isInitialized || location.state === "refresh") {
     //query data
-    _app_backend__WEBPACK_IMPORTED_MODULE_6__["default"].get(_app_config__WEBPACK_IMPORTED_MODULE_5__["default"].backendUrl + "/entity/list").then(function (resp) {
+    _app_backend__WEBPACK_IMPORTED_MODULE_6__["default"].get(_app_config__WEBPACK_IMPORTED_MODULE_5__["default"].backendUrl + "/comment/list").then(function (resp) {
       update(function (state) {
         //indicate loading finished successfully
         state.isLoading = false;
@@ -7147,7 +7149,7 @@ function EntityList() {
   };
   /**
    * Handles 'edit' command.
-   * @param id ID of the entity to edit.
+   * @param id ID of the comment to edit.
    */
 
 
@@ -7164,22 +7166,22 @@ function EntityList() {
       //close delete dialog
       state.isDeleting = false; //send delete request to backend
 
-      _app_backend__WEBPACK_IMPORTED_MODULE_6__["default"].get(_app_config__WEBPACK_IMPORTED_MODULE_5__["default"].backendUrl + "/entity/delete", {
+      _app_backend__WEBPACK_IMPORTED_MODULE_6__["default"].get(_app_config__WEBPACK_IMPORTED_MODULE_5__["default"].backendUrl + "/comment/delete", {
         params: {
           id: state.entToDel.id
         }
       }) //success
       .then(function (resp) {
-        //force reloading of entity list
+        //force reloading of comment list
         update(function () {
           return location.state = "refresh";
         }); //show success message
 
-        (0,_app_notify__WEBPACK_IMPORTED_MODULE_7__.notifySuccess)("Entity deleted.");
+        (0,_app_notify__WEBPACK_IMPORTED_MODULE_7__.notifySuccess)("Comment deleted.");
       }) //failure
       ["catch"](function (err) {
         //notify about operation failure
-        var msg = "Deletion of entity '".concat(state.entToDel.id, "' has failed. ") + "either entity is not deletable or there was backend failure.";
+        var msg = "Deletion of comment'".concat(state.entToDel.id, "' has failed. ") + "either comment is not deletable or there was backend failure.";
         (0,_app_notify__WEBPACK_IMPORTED_MODULE_7__.notifyFailure)(msg);
       });
     });
@@ -7221,7 +7223,7 @@ function EntityList() {
           header: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", __assign({
             className: "me-2"
           }, {
-            children: "Confirm entity deletion, please."
+            children: "Confirm comment deletion, please."
           })),
           style: {
             width: "50ch"
@@ -7230,7 +7232,7 @@ function EntityList() {
           children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", __assign({
             className: "alert alert-warning"
           }, {
-            children: "Do you really want to delete the following entity?"
+            children: "Do you really want to delete the following comment?"
           })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", __assign({
             htmlFor: "id",
             className: "form-label"
@@ -7300,7 +7302,7 @@ function EntityList() {
             rows: 8,
             rowsPerPageOptions: [8, 16, 32],
             stateStorage: "session",
-            stateKey: "entity-list"
+            stateKey: "comment-list"
           }, {
             children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(primereact_column__WEBPACK_IMPORTED_MODULE_3__.Column, {
               field: "id",
@@ -7385,28 +7387,28 @@ function EntityList() {
 } //
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EntityList);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CommentList);
 
 /***/ }),
 
-/***/ "./resources/js/components/entityCrud/models.tsx":
+/***/ "./resources/js/components/commentCrud/models.tsx":
 /*!*******************************************************!*\
-  !*** ./resources/js/components/entityCrud/models.tsx ***!
+  !*** ./resources/js/components/commentCrud/models.tsx ***!
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EntityForCU": () => (/* binding */ EntityForCU)
+/* harmony export */   "CommentForCU": () => (/* binding */ CommentForCU)
 /* harmony export */ });
 /**
- * Entity for creating and updating.
+ * Comment for creating and updating.
  */
-var EntityForCU =
+var CommentForCU =
 /** @class */
 function () {
-  function EntityForCU() {
+  function CommentForCU() {
     this.id = -1;
     this.date = "";
     this.name = "";
@@ -7414,7 +7416,7 @@ function () {
     this.deletable = false;
   }
 
-  return EntityForCU;
+  return CommentForCU;
 }();
 
 
@@ -7533,12 +7535,12 @@ function NavMenu() {
         }, {
           children: "Home"
         })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.NavLink, __assign({
-          to: "/entityCrud",
+          to: "/commentCrud",
           className: function className(it) {
             return "nav-link " + (it.isActive ? "active" : "");
           }
         }, {
-          children: "Entity CRUD"
+          children: "Comment CRUD"
         }))]
       })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
         children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_auth_Auth__WEBPACK_IMPORTED_MODULE_1__["default"], {})

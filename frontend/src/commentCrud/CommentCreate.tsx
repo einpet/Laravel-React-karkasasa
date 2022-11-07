@@ -94,17 +94,17 @@ function CommentCreate() {
 			let localDate = new Date(state.date.getTime() - state.date.getTimezoneOffset() * 60 *1000);
 
 			//collect Comment data
-			let Comment = new CommentForCU();
-			Comment.name = state.name;
-			Comment.date = localDate.toISOString();
-			Comment.fk_recipeid = state.fk_recipeid;
-			Comment.condition = state.condition;
-			Comment.deletable = state.deletable;
+			let comment = new CommentForCU();
+			comment.name = state.name;
+			comment.date = localDate.toISOString();
+			comment.fk_recipeid = state.fk_recipeid;
+			comment.condition = state.condition;
+			comment.deletable = state.deletable;
 
 			//request Comment creation
 			backend.post(
-				config.backendUrl + "/Comment/create",
-				Comment
+				config.backendUrl + "/comment/create",
+				comment
 			)
 			//success
 			.then(resp => {
@@ -160,7 +160,7 @@ function CommentCreate() {
 						id="fk_recipeid" 
 						className={"form-control " + (state.isNameErr ? "is-invalid" : "")}
 						value={state.fk_recipeid}
-						onChange={(e) => update(() => state.fk_recipeid = e.target.value)}
+						onChange={(e) => update(() => state.fk_recipeid = e.value!)}
 						/>
 					{state.isNameErr && 
 						<div className="invalid-feedback">Receptas must be non empty and non whitespace.</div>

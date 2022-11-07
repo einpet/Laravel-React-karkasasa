@@ -89,7 +89,7 @@ function App() {
 				</Routes>
 				{ !appState.isLoggedIn.value &&
 					<div className="d-flex flex-column h-100 justify-content-center align-items-center">
-						<span className="alert alert-primary mx-2">Please, log in to see content.</span>
+						<span className="alert alert-primary mx-2">Prisijunkite, jog matytumėte turinį.</span>
 					</div>
 				}
 			</div>
