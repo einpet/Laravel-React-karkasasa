@@ -2,7 +2,6 @@
  * Prints some information about the app. React component.
  * @returns Component HTML.
  */
- import "./style.css";
 
 function About() {
 	//render component html
