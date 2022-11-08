@@ -172,7 +172,7 @@ function CommentEdit() {
 			<div className="mb-1">Editing comment</div>
 			{ state.isLoading &&
 				<div className="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
-					<span className="alert alert-info mx-2">Loading data...</span>
+					<span className="alert alert-info mx-2">Kraunami duomenys...</span>
 				</div>
 			}
 			{ state.isInitialized && !state.isLoading && !state.isLoaded &&

@@ -156,7 +156,7 @@ function CommentList() {
 		}
 		{ state.isLoaded &&
 			<>			
-			<div className="mb-1">Komentarų sąrašas</div>
+			<div className="title"> <h2>Atsiliepimai apie įkeltus receptus</h2></div>
 
 			<Dialog
 				visible={state.isDeleting} 
@@ -207,7 +207,7 @@ function CommentList() {
 					<Column field="name" header="Pavadinimas"/>
 					<Column field="fk_recipeid" header="Receptas"/>
 					<Column field="condition" header="Vertinimas"/>
-					<Column 
+{/* 					<Column 
 						field="deletable" 
 						header="Deletable"
 						body={(row : CommentForL) => {
@@ -215,9 +215,9 @@ function CommentList() {
 								<span>{row.deletable ? "Yes" : "No"}</span>
 							</>);
 						}}
-						/>
+						/> */}
 					<Column 
-						header="Actions" 
+						header="Veiksmai" 
 						body={(row : CommentForL) => {
 							return (<>
 								<button
@@ -248,7 +248,7 @@ function CommentList() {
 					type="button"
 					className="btn btn-primary"
 					onClick={() => onCreate()}
-					>New</button>
+					>Pridėti atsiliepimą</button>
 			</div>
 			</>
 		}

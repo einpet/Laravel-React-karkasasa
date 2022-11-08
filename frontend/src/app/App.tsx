@@ -11,6 +11,7 @@ import NavMenu from '../navmenu/NavMenu';
 import Footer from 'footer/Footer';
 import About from 'about/About';
 import CommentCrud from 'commentCrud/CommentCrud';
+import Main from 'pages/main';
 
 
 class State {
@@ -83,7 +84,7 @@ function App() {
 					{ appState.isLoggedIn.value &&
 						<>						
 						<Route path="/commentCrud/*" element={<CommentCrud/>}/>
-						<Route path="/" element={<About/>}/>
+						<Route path="/About/*" element={<About/>}/>
 						</>
 					}					
 				</Routes>

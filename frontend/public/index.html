@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html >
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="theme-color" content="#000000" />
-
-	<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-	<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-	
-	<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EiReceptai</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/icon.jpg" type="image/x-icon" />
+    <!-- normalize -->
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <!-- font-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <!-- main css -->
+    <link rel="stylesheet" href="./css/main.css" />
+    <!-- java script -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          // čia rašomas JQuery kodas
+          $('#contentLeft h4').mouseover(function() { // užvedus pelyte
+            $(this).css('cursor', 'pointer'); // pakeičiamas pelytės žymeklis
+          });
+          
+          $('#contentLeft h4').click(function() { // paspaudus contentLeft h2 elem.
+          $('#contentLeft ul').slideToggle(); // slepiamas/rodomas ul meniu elem.
+        });
+      });
+    </script>
 	
 	<title>Explore</title>
 </head>

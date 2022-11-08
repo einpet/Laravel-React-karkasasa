@@ -29,7 +29,7 @@ function NavMenu() {
 				</div>
 				<span className="d-flex">
 					<NavLink 
-						to="/" 
+						to="/About" 
 						className={it => "nav-link " + (it.isActive ? "active" : "")}
 						>Pagrindinis</NavLink>
 					<NavLink 
